@@ -78,7 +78,7 @@ import { Address } from "viem";
 //   });
 // });
 
-export const app = new Frog({
+const app = new Frog({
   title: "Frog Frame",
   basePath: "/api",
   assetsPath: "/",

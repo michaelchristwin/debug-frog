@@ -27,33 +27,33 @@ const frontendURL = process.env.NEXT_PUBLIC_FRONTEND as string;
 let contractAdress: string;
 let unitPrice: bigint;
 app.frame("/frame", async (c) => {
-  const { status } = c;
-  const query = c.req.query();
-  contractAdress = query.id;
-  const NFTContract = {
-    address: contractAdress as Address,
-    abi: abi,
-    chainId: sepolia.id,
-  } as const;
-  const result = await readContracts(config, {
-    contracts: [
-      {
-        ...NFTContract,
-        functionName: "tokenURI",
-        args: [BigInt(0)],
-      },
-      {
-        ...NFTContract,
-        functionName: "_unitPrice",
-      },
-    ],
-    multicallAddress: "0xcA11bde05977b3631167028862bE2a173976CA11",
-  });
+  // const { status } = c;
+  // const query = c.req.query();
+  // contractAdress = query.id;
+  // const NFTContract = {
+  //   address: contractAdress as Address,
+  //   abi: abi,
+  //   chainId: sepolia.id,
+  // } as const;
+  // const result = await readContracts(config, {
+  //   contracts: [
+  //     {
+  //       ...NFTContract,
+  //       functionName: "tokenURI",
+  //       args: [BigInt(0)],
+  //     },
+  //     {
+  //       ...NFTContract,
+  //       functionName: "_unitPrice",
+  //     },
+  //   ],
+  //   multicallAddress: "0xcA11bde05977b3631167028862bE2a173976CA11",
+  // });
 
-  const tokenURI = result[0].result;
-  const data = await (await fetch(tokenURI as string)).json();
-  unitPrice = result[1].result as bigint;
-  console.log(data);
+  // const tokenURI = result[0].result;
+  // const data = await (await fetch(tokenURI as string)).json();
+  // unitPrice = result[1].result as bigint;
+  // console.log(data);
   return c.res({
     browserLocation: `${frontendURL}/dashboard/collection/mint/${contractAdress}`,
     image: (
@@ -64,7 +64,7 @@ app.frame("/frame", async (c) => {
           height: "100%",
         }}
       >
-        <img alt="nft" src={data.image} style={{ borderRadius: "17px" }} />
+        {/* <img alt="nft" src={data.image} style={{ borderRadius: "17px" }} /> */}
       </div>
     ),
     intents: [
